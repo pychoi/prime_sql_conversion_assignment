@@ -6,8 +6,9 @@ $(document).ready(function(){
       $.each($(this).serializeArray(), function(i, field){
          values[field.name] = field.value;
       });
-
-      getData(values);
+      console.log(values);
+      findData(values);
+      //getData(values);
    });
 
    $("#addSomeone").submit(addSomeone);
@@ -15,6 +16,17 @@ $(document).ready(function(){
 
    getData();
 });
+
+function findData(values){
+   $.ajax({
+      type: "GET",
+      url: "/find",
+      data: values,
+      success: function(data){
+         updateDOM(data);
+      }
+   });
+}
 
 function getData(values){
    $.ajax({
@@ -24,7 +36,7 @@ function getData(values){
       success: function(data){
          updateDOM(data);
       }
-   })
+   });
 }
 
 function addSomeone(){

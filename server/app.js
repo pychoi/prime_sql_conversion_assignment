@@ -92,7 +92,27 @@ app.delete('/data', function(req,res){
     //    res.send(data);
     //});
 
+});
 
+app.get('/find', function(req,res){
+
+    //console.log("This is for FIND: ", req.query);
+    //SQL Query > SELECT data from table
+    pg.connect(connectionString, function (err, client) {
+
+        var people = "%" + req.query.peopleSearch + "%";
+
+        client.query("SELECT id, name, location, age, spirit_animal, address FROM people WHERE name ILIKE $1", [people], function(err, result){
+            if (err) {
+                console.log("Error! ", err);
+                res.send(false);
+            }
+
+            console.log(result.rows);
+            res.send(result.rows);
+        });
+
+    });
 });
 
 app.get("/*", function(req,res){
