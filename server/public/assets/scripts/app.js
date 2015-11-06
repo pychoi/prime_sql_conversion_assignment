@@ -6,7 +6,10 @@ $(document).ready(function(){
       $.each($(this).serializeArray(), function(i, field){
          values[field.name] = field.value;
       });
-      console.log(values);
+
+      //Clear out form input fields
+      $("#search").find("input[type=text]").val("");
+
       findData(values);
       //getData(values);
    });
@@ -47,6 +50,9 @@ function addSomeone(){
       values[field.name] = field.value;
    });
 
+   //Clear out form input fields
+   $("#addSomeone").find("input[type=text]").val("");
+
    $.ajax({
       type: "POST",
       url: "/data",
@@ -60,7 +66,7 @@ function addSomeone(){
 function deletePerson(){
    var deletedId = {"id" : $(this).data("id")};
 
-   console.log("Meaningful Log: ", deletedId);
+   //console.log("Meaningful Log: ", deletedId);
 
    $.ajax({
       type: "DELETE",

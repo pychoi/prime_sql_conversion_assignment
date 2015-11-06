@@ -73,7 +73,7 @@ app.post('/data', function(req,res){
 });
 
 app.delete('/data', function(req,res){
-    console.log("This shows when delete: ", req.body);
+    //console.log("This shows when delete: ", req.body);
 
     pg.connect(connectionString, function (err, client) {
         client.query("DELETE FROM people WHERE id = ($1)", [req.body.id], function(err, result){
@@ -97,7 +97,6 @@ app.delete('/data', function(req,res){
 app.get('/find', function(req,res){
 
     //console.log("This is for FIND: ", req.query);
-    //SQL Query > SELECT data from table
     pg.connect(connectionString, function (err, client) {
 
         var people = "%" + req.query.peopleSearch + "%";
@@ -108,7 +107,7 @@ app.get('/find', function(req,res){
                 res.send(false);
             }
 
-            console.log(result.rows);
+            //console.log(result.rows);
             res.send(result.rows);
         });
 
